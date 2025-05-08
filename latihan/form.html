@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Newsletter Sign Up</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    function formvalidation(event) {
+      event.preventDefault(); // prevent form submission
+
+      var first = document.getElementById("first").value.trim();
+      var last = document.getElementById("last").value.trim();
+      var email = document.getElementById("email").value.trim();
+
+      // Validasi First Name
+      if (first === "") {
+        Swal.fire({
+          title: "Pesan Kesalahan",
+          text: "First Name harus diisi!",
+          icon: "error"
+        });
+        document.getElementById("first").focus();
+        return false;
+      }
+
+      // Validasi Last Name
+      if (last === "") {
+        Swal.fire({
+          title: "Pesan Kesalahan",
+          text: "Last Name harus diisi!",
+          icon: "error"
+        });
+        document.getElementById("last").focus();
+        return false;
+      }
+
+      // Validasi Email
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (email === "") {
+        Swal.fire({
+          title: "Pesan Kesalahan",
+          text: "Email harus diisi!",
+          icon: "error"
+        });
+        document.getElementById("email").focus();
+        return false;
+      } else if (!emailPattern.test(email)) {
+        Swal.fire({
+          title: "Pesan Kesalahan",
+          text: "Format email tidak valid!",
+          icon: "error"
+        });
+        document.getElementById("email").focus();
+        return false;
+      }
+
+      // Jika semua valid, tampilkan alert sukses lalu submit
+      Swal.fire({
+        title: "Berhasil!",
+        text: "Formulir berhasil dikirim.",
+        icon: "success"
+      }).then(() => {
+        event.target.submit(); // submit form setelah alert sukses
+      });
+
+      return false;
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #fff;
+      color: #000;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      border-left: 10px solid #e36f1e;
+      padding-left: 20px;
+    }
+    h2 {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    form {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    input[type="text"],
+    input[type="email"] {
+      padding: 12px;
+      border: 2px solid #000;
+      font-size: 16px;
+      flex: 1 1 200px;
+    }
+    .button--secondary {
+      border: 2px solid #e36f1e;
+      background: none;
+      color: black;
+      font-weight: bold;
+      padding: 12px 20px;
+      cursor: pointer;
+    }
+    .button--secondary:hover {
+      background: #e36f1e;
+      color: white;
+    }
+    .home-email-block__sms-mobile {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    small {
+      font-size: 12px;
+    }
+    small a {
+      text-decoration: underline;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Sign up for our mailing list.</h2>
+
+    <form id="contactfrom" action="https://google.co.id" method="get" onsubmit="return formvalidation(event)">
+      <input type="hidden" name="g-token" id="g-token">
+      <input type="hidden" name="_clientID" value="100002530">
+      <input type="hidden" name="_deExternalKey" value="CAREwebsignups">
+      <input type="hidden" name="_action" value="add">
+      <input type="hidden" name="_returnXML" value="0">
+      <input type="hidden" name="_successURL" value="https://www.care.org/thanks-for-signing-up-for-our-newsletter/">
+      <input type="hidden" name="_errorURL" value="https://www.care.org/could-not-sign-up-for-newsletter/">
+
+      <input type="text" id="first" name="FirstName" placeholder="First Name*" >
+      <input type="text" id="last" name="LastName" placeholder="Last Name*" >
+      <input type="text" id="email" name="EmailAddress" placeholder="Email*" >
+      <button class="button--secondary" type="submit">SUBMIT →</button>
+    </form>
+
+    <h3 class="home-email-block__sms-mobile">Text CARE to 227387 to stay connected.</h3>
+    <small>
+      This site is protected by reCAPTCHA and the Google
+      <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+      <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+    </small>
+  </div>
+
+</body>
+</html>
